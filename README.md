@@ -1,0 +1,2 @@
+This directory containt the data that's used for my bachelor project. Any insignificant data that's dropped here, will be moved to the directory draft. There is where I keept experimental files and all irrelevant code.
+Usually submitibble files are stored as Jupyter Notebook format. With that being said any python files `py` you find here, don't serve the project directly.
