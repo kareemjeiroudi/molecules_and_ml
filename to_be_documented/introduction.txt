@@ -1,0 +1,65 @@
+- Why are we using Neural Networks in the project?
+Neural networks are interesting models underlying much of the newest AI applications and algorithms. Recent advances in training algorithms and GPU enabled code together with publicly available highly efficient libraries such as Google’s Tensorflow or Theano makes them highly interesting for modelling molecular data.
+
+- What are we going to do?
+Here I explore the high level Neural Network library for Python, Keras.
+
+- What is your document?
+Table of contents
+   Background on chemical space and drug discovery
+   Basic concepts of fingerprinting
+
+- After Processing the Data, what heppens?
+The first step in molecular machine learning is encoding the structure of the molecule in a form that is amenable to machine learning
+
+- Why was fingerprinting used originally?
+Fingerprinting was originally designed to solve the problem of molecular substructure search – how do I find all the molecules in my database with a particular substructure? A related problem is molecular similarity - given a molecule, how do I find the molecules in my database that are most similar. Only later were fingerprints applied for machine learning, or what has traditionally called quantitative structure property relationships (QSPR).
+
+- How the hashing works in fingerprinting?
+Fingerprinting creates an efficient representation of the molecular graph. The basic process of fingerprinting is as follows: First the algorithm generates a set of patterns. For instance, enumeration of different paths is common:
+
+0-bond paths:	1-bond paths:
+  C	OC
+  O	C==C
+  N	CN
+2-bond paths:	3-bond paths:
+ OC=C	OC=CN
+ C=CN
+
+Storing all this data would result in an enormous representation. The trick of fingerprinting is to “hash” each of these features, which essentially means they act as seeds to a random number generator called a hash function. The hash function generates a bit string. Typically the hash function is chosen so that 4 or 5 bits per pattern are non-zero in the bit string. Next, all of the bit strings are OR’ed together.
+
+- Why did you use L1 Regularization?
+Another point is that Lasso regression (L1 regularization) generally does slightly better than Ridge regression with fingerprints, since fingerprints can have elements which are always zero or almost always zero. [L1 regularization introduces a penalty term which has a gradient that forces coefficients corresponding to variables with no predictive power to be precisely zero, whereas L2 has trouble getting coefficients to be precisely zero.
+
+- Where was the data taken from?
+In this tutorial, we are going to use the Pima Indians onset of diabetes dataset. This is a standard machine learning dataset from the UCI Machine Learning repository. It describes patient medical record data for Pima Indians and whether they had an onset of diabetes within five years.
+
+- What sort of classification problem is yours?
+As such, it is a binary classification problem (onset of diabetes as 1 or not as 0). All of the input variables that describe each patient are numerical. This makes it easy to use directly with neural networks that expect numerical input and output values.
+
+- What criterium you used when building your model?
+We create a Sequential model and add layers one at a time until we are happy with our network topology.
+
+- How did you ensure tha the input size matches the variable dimesion?
+The first thing to get right is to ensure the input layer has the right number of inputs. This can be specified when creating the first layer with the input_dim argument and setting it to 8 for the 8 input variables.
+
+- How do we know the number of layers and their types?
+This is a very hard question. There are heuristics that we can use and often the best network structure is found through a process of trial and error experimentation. Generally, you need a network large enough to capture the structure of the problem if that helps at all.
+
+- More on the choice of your layers?
+In this example, we will use a fully-connected network structure with three layers.
+Fully connected layers are defined using the Dense class. We can specify the number of neurons in the layer as the first argument, the initialization method as the second argument as init and specify the activation function using the activation argument.
+
+- How about the choice of you output layer?
+We will use the rectifier (‘relu‘) activation function on the first two layers and the sigmoid function in the output layer. It used to be the case that sigmoid and tanh activation functions were preferred for all layers. These days, better performance is achieved using the rectifier activation function. We use a sigmoid on the output layer to ensure our network output is between 0 and 1 and easy to map to either a probability of class 1 or snap to a hard classification of either class with a default threshold of 0.5.
+
+- What was your backend?
+ompiling the model uses the efficient numerical libraries under the covers (the so-called backend) such as Theano or TensorFlow. The backend automatically chooses the best way to represent the network for training and making predictions to run on your hardware, such as CPU or GPU or even distributed.
+
+- What considerations have you made in regard to setting your hyperparameters?
+The time required to train and test a model can depend upon the choice of its hyperparameters.
+Most performance variation can be attributed to just a few hyperparameters.[2][1][3] The tunability of an algorithm, hyperparameter, or interacting hyperparameters is a measure of how much performance can be gained by tuning it.
+
+- What hash you need?
+236da912b8c07e77a4c Added old notebook
+
