@@ -6,12 +6,12 @@ import numpy as np
 from keras import backend as K
 from keras.models import Sequential
 from keras.layers import Activation, Dropout
-from talos.layers import hidden_layers
+# from talos.layers import hidden_layers
 from keras.layers.core import Dense
 from keras.activations import relu, elu, softmax
 from keras.optimizers import SGD, Adam, Nadam, RMSprop
 from keras.metrics import categorical_crossentropy
-from keras.metrics.keras_metrics import fmeasure
+from keras.metrics import fmeasure
 from keras.losses import binary_crossentropy, logcosh
 from keras.constraints import maxnorm
 ## for Grid Search
