@@ -182,23 +182,28 @@ search_result = gp_minimize(func=fitness,
 	n_calls=40,
 	x0=default_parameters)
 
-## Plot the progress of the optimizer.
-plot_convergence(search_result)
+## Report Result of the optimizer.
 print("Best serach results:")
 print(search_result.x)
 print(search_result.space)
-print(point_to_dict(search_result.x))
 print("Lowest fitness value:")
 print(search_result.fun)
 zipped = sorted(zip(search_result.func_vals, search_result.x_iters))
-print()
+print(zipped)
+
+## Write sorted results to csv file for exporting
 of = open('output_bayesian_optimization.csv', 'w')
 header="Fit Value; Learning Rate; Dense Layers; Num. Neurons; Activation\n"
 of.write(header)
 for i in zipped:
     row = "{0}; {1}; {2}; {3}; {4};\n".format(i[0], i[1][0], i[1][1], i[1][2], i[1][3])
     of.write(row)
-
-#of.write(str(sorted(zip(search_result.fun_vals, search_result.x_iters))))
 of.close()
-plot_objective(search_result)
+
+## Plot results of optimizer
+dim_names = ['learning_rate', 'dense_layers', 'nodes', 'activation']
+plot_objective(search_result, dimensions=dim_names)
+plot_evaluations(search_result)
+
+
+

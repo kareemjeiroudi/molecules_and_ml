@@ -1,9 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Author: Kareem
-Date: 03.03.2019
-Title: Grid Search for Molecules mutagenity
+Created on Sun Mar  3 13:11:57 2019
+
+@author: kareem
+@Date: 03.03.2019
+@Title: Grid Search for Molecules mutagenity
 """
-## imports
+## Imports
 from __future__ import print_function
 import numpy as np
 
@@ -21,8 +25,6 @@ from sklearn.model_selection import GridSearchCV # not used anu longer
 from sklearn.metrics import roc_auc_score # Compute Area Under the Receiver Operating Characteristic Curve (ROC AUC) from prediction scores
 
 from datetime import datetime # to time the Grid Search
-
-pp = pprint.PrettyPrinter(indent=4)
 
 ## Load Datset
 train_samples = np.loadtxt("data/train_samples.txt", delimiter=' ', comments='# ', encoding=None)
