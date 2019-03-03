@@ -9,136 +9,208 @@ Created on Sun Mar  3 13:11:57 2019
 """
 ## Imports
 from __future__ import print_function
-import numpy as np
 
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Dropout
-from keras.optimizers import *
-from keras.wrappers.scikit_learn import KerasClassifier
-from keras.datasets import mnist
-import pprint
-## permute hyperparameters (equivelent of nested for loops)
-from itertools import product
+#from keras.datasets import mnist
+
 
 from sklearn.model_selection import GridSearchCV # not used anu longer
 from sklearn.metrics import roc_auc_score # Compute Area Under the Receiver Operating Characteristic Curve (ROC AUC) from prediction scores
 
 from datetime import datetime # to time the Grid Search
 
+
 ## Load Datset
-train_samples = np.loadtxt("data/train_samples.txt", delimiter=' ', comments='# ', encoding=None)
-train_labels = np.loadtxt("data/train_labels.txt", delimiter=' ', comments='# ', encoding=None)
-valid_samples = np.loadtxt("data/valid_samples.txt", delimiter=' ', comments='# ', encoding=None)
-valid_labels = np.loadtxt("data/valid_labels.txt", delimiter=' ', comments='# ', encoding=None)
+import numpy as np
+X_train = np.loadtxt("data/train_samples.txt", delimiter=' ', comments='# ', encoding=None)
+y_train = np.loadtxt("data/train_labels.txt", delimiter=' ', comments='# ', encoding=None)
+X_test = np.loadtxt("data/valid_samples.txt", delimiter=' ', comments='# ', encoding=None)
+y_test = np.loadtxt("data/valid_labels.txt", delimiter=' ', comments='# ', encoding=None)
 
-
+                    
 ## Model Definition
-def build_model(optimizer, learning_rate, activation, dropout_rate,
-                initilizer, num_unit, num_layers=1):
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+from keras.optimizers import Adam, SGD
+from sklearn.metrics import roc_auc_score
+
+def build_classifier(units, activation, optimizer, learning_rate, num_layers=1, dropout_rate=0.2):
     """
-    Wrapper function that takes hyperparametrs as input and 
-    returns a keras sequential model
-    @Params:
-    optimizer:      categorical value e.g. Adam, SGD.
-    learning_rate : the learning at which the model updates weights.
-    activation:     choice of activation function for hidden layers.
-    dropout_rate:   dropout rate at which some neurons of previous layers 
-                    are silenced.Used only for hidden layers.
-    initializer:    initialization method of input and hidden layers.
-    num_unit:       number of neurons in hidden layers. Decreases by half as much
-                    for every other layer.
-    num_layers:     number of layers of which the hidden layers of the network constitute.
+    Wrapped function that takes hyperparametrs as input and 
+    returns a desired Keras sequential model. Useful for a Grid Search.
+    
+    Params:
+    -------
+    units:
+        (int) number of neurons in the hidden layers (i.e. output dimension).
+    activation:    
+        categorical - string, choice of activation function for hidden layers.
+    optimizer:
+        categorical - string value e.g. Adam, SGD.
+    learning_rate :
+        (float) the learning at which the model updates weights.
+    num_layers:
+        (int) number of hidden layers. By default=1
+    dropout_rate:   
+        (float) dropout rate at which some neurons of previous layers are silenced. Used only for hidden layers.
+    
+    Returns:
+    --------
+        Keras classifier model
     """
+    ## clear session to avoid overlaoding the backend engine
     keras.backend.clear_session()
     model = Sequential()
-    model.add(Dense(num_unit, input_dim=train_samples.shape[1], kernel_initializer=initilizer,
-                    activation=activation))
-    model.add(Dropout(dropout_rate))
-    ## to create an arbitrary number of hidden layers
+    ## Input layers
+    model.add(Dense(units=units, input_dim=X_train.shape[1], activation=activation))
+    ## Create an arbitrary number of Hidden Layers
     for n in range(num_layers):
-      d = 2
-      nu = int(num_unit/d)
-      model.add(Dense(nu, kernel_initializer=initilizer,
-                    activation=activation))
+#      d = 2
+#      nu = int(units/d)
+      model.add(Dense(units=units, activation=activation))
       model.add(Dropout(dropout_rate))
-      d += 2
+      ## end of for loop
+    
+    ## Output Layer
     model.add(Dense(units=1, activation='sigmoid'))
-    model.compile(loss='binary_crossentropy', 
-                  optimizer=optimizer(lr=learning_rate),
-                  metrics=['accuracy'])
+    ## Compile the model
+    model.compile(loss='binary_crossentropy', optimizer=optimizer(lr=learning_rate),
+                  metrics=['accuracy', roc_auc_score])
+    
     return model
 
-## fix random seed for reproducibility
-seed = 7
-np.random.seed(seed)
 
-## Define the parameters
-optimizer = [SGD, RMSprop, Adagrad, Adadelta, Adam, Adamax]
-learning_rate = [0.001, 0.01, 0.1, 0.2, 0.3]
-activation = ['relu', 'softsign', 'tanh', 'sigmoid', 'selu']
-dropout_rate = [0.0, 0.1, 0.5, 0.7]
-initilizer = ['lecun_uniform', 'normal', 'uniform', 'he_uniform']
-num_unit = [5, 10, 100, 256, 512, 2048]
-num_layers = [2, 5]
-epochs = [1, 20, 50, 100]
-batch_size = [20, 50, 100, 200, 500, 1000]
-momentum = [0.0, 0.2, 0.6,  0.9][:1]
+## Define the Search Space (takes a week)
+units = [100, 256, 512, 1024, 2048]
+activation = ['relu', 'sigmoid', 'selu']
+optimizer = [SGD, Adam]
+learning_rate = [0.001, 0.005, 0.01, 0.05, 0.1, 0.2, 0.5]
+num_layers = [2, 3, 5, 9]
+dropout_rate = [0.001, 0.005, 0.01, 0.05, 0.1, 0.2, 0.5]
+#initilizer = ['lecun_uniform', 'normal', 'uniform', 'he_uniform']
+epochs = [10, 20, 50, 100]
+batch_size = [20, 50, 100, 200]
+#momentum = [0.0, 0.2, 0.6,  0.9][:1]
 
-f = open("OUTPUT_02.txt", "w")
+hyperparameters = [units,
+                   activation,
+                   optimizer,
+                   learning_rate,
+                   num_layers,
+                   dropout_rate,
+                   epochs,
+                   batch_size]
 
-## estimate the time needed for the grid search
+## Define (test) Search Space (takes a whole day)
+units = [512, 1024, 2048]
+activation = ['relu', 'sigmoid', 'selu']
+optimizer = [SGD, Adam]
+learning_rate = [0.001, 0.01, 0.1, 0.2, 0.5]
+num_layers = [2, 5, 9]
+dropout_rate = [0.001, 0.01, 0.1, 0.2, 0.5]
+#initilizer = ['lecun_uniform', 'normal', 'uniform', 'he_uniform']
+epochs = [10, 20, 50, 100]
+batch_size = [50, 100, 200]
+#momentum = [0.0, 0.2, 0.6,  0.9][:1]
+
+hyperparameters = [units,
+                   activation,
+                   optimizer,
+                   learning_rate,
+                   num_layers,
+                   dropout_rate,
+                   epochs,
+                   batch_size]
+
+## Define  a 3rd (test) Search Space (take about 1.5 hours)
+units = [512, 1024, 2048]
+activation = ['relu', 'sigmoid', 'selu']
+optimizer = [SGD, Adam]
+learning_rate = [0.001, 0.01, 0.1, 0.2, 0.5]
+num_layers = [2, 5, 9]
+#dropout_rate = [0.001, 0.01, 0.1, 0.2, 0.5]
+#initilizer = ['lecun_uniform', 'normal', 'uniform', 'he_uniform']
+epochs = [10]
+batch_size = [50, 100, 200]
+#momentum = [0.0, 0.2, 0.6,  0.9][:1]
+
+hyperparameters = [units,
+                   activation,
+                   optimizer,
+                   learning_rate,
+                   num_layers,
+#                   dropout_rate,
+                   epochs,
+                   batch_size]
+
+## the folloing function requires that the output file is open
+f = open("Grid_Search_Ouput.txt", "w")
 def estimateTime():
-  hyperparameters = [optimizer, learning_rate, activation, dropout_rate,
-  initilizer, num_unit, num_layers, epochs, batch_size , momentum]
-  product = 1
-  for hyperparameter in hyperparameters:
-    product = product * len(hyperparameter)
-  print("Number of iterations: {}".format(product))
-  f.write("Number of iterations: {}\n".format(product))
-  seconds = product * 6
-  h = seconds//(60*60)
-  m = (seconds-h*60*60)//60
-  s = seconds-(h*60*60)-(m*60)
-  print("Estimated time: {}h:{}m:{}s".format(h, m, s))
-  f.write("Estimated time: {}h:{}m:{}s\n".format(h, m, s))
+    """
+    Custom function that estimates the time that a grid search will take depending on the
+    number of permutations.
+    """
+    product = 1
+    for hyperparameter in hyperparameters:
+        print(len(hyperparameter))
+        product = product * len(hyperparameter)
+    message = "Number of iterations: {}".format(product)
+    print(message)
+    f.write(message)
+    total_seconds = product * 6
+    h = str(total_seconds//3600)
+    remainder = float('.'+str(total_seconds/3600).split('.')[1])
+    m = str(format(60 * remainder, '.8f')).split('.')[0]
+    remainder = float(str(format(60 * remainder, '.8f')).split('.')[1])
+    s = str(format(remainder * 60, '.8f')).split('.')[0]
+    message = "Estimated time: {}h:{}m:{}s".format(h, m, s)
+    print(message)
+    f.write(message)
 
 estimateTime()
 
 
-def gridSearch(hyperparameters_combinations):
+## Fix random seed for reproducibility
+seed = 7
+np.random.seed(seed)
+
+def gridSearch(hyperparameters):
   '''
-  takes permuations of hyperparameters from the class iterttols.product,
-  builds a new model in accord with these parameters,
-  returns best auc score and best parameters
-  Also prints out all parameters it tests
-  @Params:
-  hyperparameters_combinations:   a product from class itertools representing all 
-                                  possible permutations of hyperparameters.
+  Wrapper function that takes permuations of hyperparameters from the class itertools.product,
+  builds a new model in accord with these parameters. Analogous to the GridSerach_CV form 
+  sklearn. Lasty, it returns best Roc AUC score and best parameters
+  Also prints out all parameters it tests (the progress of the Grid Search).
+  
+  Parameters:
+  -------
+  hyperparameters:
+      (Iterable) product from class itertools representing all possible permutations of hyperparameters.
   '''
+  ## Values to be reported
   best_score = 0
   params = {}
   best_params = {}
   model_nr = 0
-  for comb in hyperparameters_combinations:
+  
+  for permute in hyperparameters:
     model_nr +=1
-    model = build_model(comb[0], comb[1], comb[2], comb[3],
-                comb[4], comb[5], comb[6])
-    for epoch in range(comb[7]):
-      model.fit(train_samples, train_labels, batch_size=comb[8], epochs=1)
+    params['units'] = permute[0]
+    params['activation'] = permute[1]
+    params['num_layers'] = permute[2]
+#    params['dropout_rate'] = permute[3]
+    params['optimizer'] = permute[3]
+    params['learning_rate'] = permute[4]
+    params['epochs'] = permute[5]
+    params['batch_size'] = permute[6]
+    
+    model = build_classifier(permute[0], permute[1], permute[2], permute[3],
+                permute[4], permute[5], permute[6])
+    for epoch in range(permute[7]):
+      model.fit(train_samples, train_labels, batch_size=permute[8], epochs=1)
       predictions = model.predict(valid_samples)
       auc = roc_auc_score(valid_labels, predictions)
 
-    params['optimizer'] = comb[0]
-    params['learning_rate'] = comb[1]
-    params['activation'] = comb[2]
-    params['dropout_rate'] = comb[3]
-    params['initilizer'] = comb[4]
-    params['num_unit'] = comb[5]
-    params['num_layers'] = comb[6]
-    params['epochs'] = comb[7]
-    params['batch_size'] = comb[8]
-    params['momentum'] = comb[9]
+   
     f.write("Model number {}:\n".format(model_nr))
     f.write(str(params) +'\n')
     f.write('auc score: {}'.format(auc)+'\n\n')
@@ -148,11 +220,20 @@ def gridSearch(hyperparameters_combinations):
       best_params = params
   return best_score, best_params
 
-hyperparameters_combinations = product(optimizer, learning_rate, activation, dropout_rate,
-initilizer, num_unit, num_layers, epochs, batch_size , momentum)
-
+## Permute hyperparameters (equivelent of nested for loops)
+from itertools import product
+hyperparameters = product(units,
+                   activation,
+                   num_layers,
+#                   dropout_rate,
+                   optimizer,
+                   learning_rate,
+                   epochs,
+                   batch_size)
+for i in hyperparameters:
+    print(i)
 start=datetime.now()
-best_auc, best_params = gridSearch(hyperparameters_combinations)
+best_auc, best_params = gridSearch(hyperparameters)
 timing = datetime.now()-start
 print("The Search took {}".format(timing))
 print('Best model:')
