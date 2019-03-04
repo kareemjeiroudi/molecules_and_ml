@@ -69,50 +69,7 @@ def build_classifier(units, activation, optimizer, learning_rate, num_layers=1, 
     
     return model
 
-
-## Define the Search Space (takes a week)
-units = [100, 256, 512, 1024, 2048]
-activation = ['relu', 'sigmoid', 'selu']
-optimizer = [SGD, Adam]
-learning_rate = [0.001, 0.005, 0.01, 0.05, 0.1, 0.2, 0.5]
-num_layers = [2, 3, 5, 9]
-dropout_rate = [0.001, 0.005, 0.01, 0.05, 0.1, 0.2, 0.5]
-#initilizer = ['lecun_uniform', 'normal', 'uniform', 'he_uniform']
-epochs = [10, 20, 50, 100]
-batch_size = [20, 50, 100, 200]
-#momentum = [0.0, 0.2, 0.6,  0.9][:1]
-
-hyperparameters = [units,
-                   activation,
-                   optimizer,
-                   learning_rate,
-                   num_layers,
-                   dropout_rate,
-                   epochs,
-                   batch_size]
-
-## Define (test) Search Space (takes a whole day)
-units = [512, 1024, 2048]
-activation = ['relu', 'sigmoid', 'selu']
-optimizer = [SGD, Adam]
-learning_rate = [0.001, 0.01, 0.1, 0.2, 0.5]
-num_layers = [2, 5, 9]
-dropout_rate = [0.001, 0.01, 0.1, 0.2, 0.5]
-#initilizer = ['lecun_uniform', 'normal', 'uniform', 'he_uniform']
-epochs = [10, 20, 50, 100]
-batch_size = [50, 100, 200]
-#momentum = [0.0, 0.2, 0.6,  0.9][:1]
-
-hyperparameters = [units,
-                   activation,
-                   optimizer,
-                   learning_rate,
-                   num_layers,
-                   dropout_rate,
-                   epochs,
-                   batch_size]
-
-## Define  a 3rd (test) Search Space (take about 1.5 hours)
+## Define Search Space (takes about 1.5 hours on our cluster)
 units = [512, 1024, 2048]
 activation = ['relu', 'sigmoid', 'selu']
 optimizer = [SGD, Adam]
