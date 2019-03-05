@@ -165,6 +165,7 @@ def fitness(learning_rate, dense_layers, nodes, activation):
 		best_auc = auc
 
 	## Delete the Keras model with these heyper parameters from memory.
+
 	## Also clear the session.
 	del model
 #    tf.keras.clear_session()
