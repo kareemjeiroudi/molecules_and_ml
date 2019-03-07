@@ -12,50 +12,46 @@ Created on Tue Mar  5 11:20:42 2019
 import numpy as np
 X_train = np.loadtxt("data/train_samples.txt", delimiter=' ', comments='# ', encoding=None)
 y_train = np.loadtxt("data/train_labels.txt", delimiter=' ', comments='# ', encoding=None)
-X_valid = np.loadtxt("data/valid_samples.txt", delimiter=' ', comments='# ', encoding=None)
-y_valid = np.loadtxt("data/valid_labels.txt", delimiter=' ', comments='# ', encoding=None)
-                          
-## See about converting a string into a dictionary
-dictionary = "{'optimizer': <class 'keras.optimizers.SGD'>, 'learning_rate': 0.1, 'activation': 'relu', 'dropout_rate': 0.1, 'initilizer': 'he_uniform', 'num_unit': 100, 'num_layers': 2, 'epochs': 50, 'batch_size': 500, 'momentum': 0.0}"
+X_test = np.loadtxt("data/valid_samples.txt", delimiter=' ', comments='# ', encoding=None)
+y_test = np.loadtxt("data/valid_labels.txt", delimiter=' ', comments='# ', encoding=None)
+
 ### Constructing the model ###
 import keras as k
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
-from keras.optimizers import SGD, Adam
+from keras.optimizers import SGD
 from keras.metrics import binary_accuracy
 k.backend.clear_session()
 classifier = Sequential()
 ## Input layer
-classifier.add(Dense(units=100, input_dim=len(X_train[0]), activation='relu', kernel_initializer='he_uniform'))
+classifier.add(Dense(units=512, input_dim=len(X_train[0]), activation='relu'))
 ## Hidden layer
-classifier.add(Dense(units=50, activation='relu', kernel_initializer='he_uniform'))
-classifier.add(Dropout(rate=0.1))
-classifier.add(Dense(units=25, activation='relu', kernel_initializer='he_uniform'))
-classifier.add(Dropout(rate=0.1))
+for i in range(5):
+    classifier.add(Dense(units=512, activation='relu'))
+    classifier.add(Dropout(rate=0.1))
 ## Ouptut layer
 classifier.add(Dense(units=1, activation='sigmoid'))
 ## Compilation
 classifier.compile(optimizer=SGD(lr=0.1), loss='binary_crossentropy', metrics=[binary_accuracy])
 ## Train
-classifier.fit(X_train, y_train, batch_size=500, epochs=50)
+classifier.fit(X_train, y_train, batch_size=100, epochs=10)
 ## Predict
-y_prob = classifier.predict(X_valid)
-y_pred= classifier.predict_classes(X_valid)
+y_prob = classifier.predict(X_test)
+y_pred= classifier.predict_classes(X_test)
 ## Evaluating AUC
 from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
-auc = roc_auc_score(y_valid, y_prob)
+auc = roc_auc_score(y_test, y_prob)
 
 ## Plotting ROC
 import matplotlib.pyplot as plt
-fpr, tpr, thresholds = roc_curve(y_valid, y_prob)
+fpr, tpr, thresholds = roc_curve(y_test, y_prob)
 def plot_roc_curve(fpr, tpr, auc):
     plt.figure()
     plt.plot(fpr, tpr, color='brown',
              lw=2, label='ROC curve (AUC = %0.2f)' % auc)
     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-    plt.plot([0, 1], [1, 0], color='grey', lw=1, linestyle='--')
     plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
+    plt.ylim([0.0, 1.0])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     plt.title('Receiver Operating Characteristic')
@@ -64,12 +60,9 @@ def plot_roc_curve(fpr, tpr, auc):
     plt.show()
 plot_roc_curve(fpr, tpr, auc)
 
-## Choosing a custom threshold
-y_label = [0 if y_pred[i]<=0.661766 else 1 for i in range(len(y_pred))]
-y_label = np.array(y_label)
 
 ## Construct and plot confusion matrix
-cm = confusion_matrix(y_valid, y_pred)
+cm = confusion_matrix(y_test, y_pred)
 from itertools import product
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
@@ -104,18 +97,12 @@ def plot_confusion_matrix(cm, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.tight_layout()
-
-np.set_printoptions(precision=2)
         
 ## Plot Unnormalized confusion matrix
-class_names=['non-mutagen', 'mutagen']
+class_names = np.array(['non-mutagen', 'mutagen'])
 plot_confusion_matrix(cm, classes=class_names,
                       title='Confusion matrix, without normalization')
-## Plot normalized confusion matrix
-#plot_confusion_matrix(cm, classes=class_names, normalize=True,
-#                      title='Normalized confusion matrix')
 plt.show()
-
 
 ## Extracting dictionaries to make a full-record analysis
 import re
@@ -123,7 +110,7 @@ import ast
 indices = []
 all_hyperparameters = []
 scores = []
-f = open('OUTPUT_02.txt', 'r')
+f = open('Grid_Search_Ouput.txt', 'r')
 for line in f.readlines():
     ## Store model number
     if line.startswith('Model'):
@@ -140,16 +127,21 @@ for line in f.readlines():
         all_hyperparameters.append(ast.literal_eval(line))
 f.close()
 
-for i in range(all_hyperparameters):
-    all_hyperparameters[i]['index'] = index
-    all_hyperparameters[i]['auc'] = score
+for i in range(len(all_hyperparameters)):
+    all_hyperparameters[i]['index'] = indices[i]
+    all_hyperparameters[i]['auc'] = scores[i]
     
 
 ## Writing the dictionaries into a csv file
 import csv
-with open('all_hyperparameters.csv', 'w', newline='') as csvfile:
+with open('all_hyperparameters_2.csv', 'w', newline='') as csvfile:
     fieldnames = all_hyperparameters[0].keys()
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
     writer.writeheader()
     writer.writerows(all_hyperparameters)
+    
+
+#### Produce a Boxplot ####
+import pandas as pd
+data = pd.read_csv("all_hyperparameters_2.csv")
