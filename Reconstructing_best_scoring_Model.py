@@ -145,3 +145,21 @@ with open('all_hyperparameters_2.csv', 'w', newline='') as csvfile:
 #### Produce a Boxplot ####
 import pandas as pd
 data = pd.read_csv("all_hyperparameters_2.csv")
+
+#### Saving the Model's weights and architecture ####
+## serialize model to JSON
+model_json = classifier.to_json()
+with open("best_model.json", "w") as jf:
+    jf.write(model_json)
+# serialize weights to HDF5
+classifier.save_weights("best_model.h5")
+
+
+### Loading Model weights and architecture ####
+from keras.models import model_from_json
+# load json and create model
+jf = open('best_model.json', 'r')
+best_model = model_from_json(jf.read())
+jf.close()
+# load weights into new model
+best_model.load_weights("best_model.h5")
