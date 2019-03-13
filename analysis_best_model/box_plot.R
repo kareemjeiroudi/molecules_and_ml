@@ -81,9 +81,41 @@ sd_auc[4, 3] = 0.0122
 sd_auc[4, 4] = 0.0040
 sd_auc[4, 5] = 0.0002
 
-first_color <- rgb(17, 219, 161, alpha=255*0.4, maxColorValue=255)
+first_color <- rgb(17, 219, 161, alpha=255*0.8, maxColorValue=255)
 plot(x=unique_lr, y=mean_auc[1,], col=first_color, xlab = "Learning Rate", ylab = "ROC_AUC Score", 
-     ylim=c(0.3, 1), main = "AUC vs. Learning Rate", type="b", lwd=5)
+     ylim=c(0.3, 1), xlim=c(-.05, 0.55), main = "AUC vs. Learning Rate", type="b", lwd=3)
+lines(unique_lr, mean_auc[1,]+sd_auc[1,], type='n') # upper bound
+lines(unique_lr, mean_auc[1,]-sd_auc[1,], type='n') # lower bound
+first_polygon <- rgb(17, 219, 161, alpha=255*0.2, maxColorValue=255)
+polygon(c(unique_lr, rev(unique_lr)), c(mean_auc[1,]+sd_auc[1,], rev(mean_auc[1,]-sd_auc[1,])),
+        col = first_polygon, border = NA) # plogon to fill the area
+# second line
+second_color <- rgb(17, 101, 219, alpha=255*0.8, maxColorValue=255)
+lines(x=unique_lr, y=mean_auc[2,], type="b", col=second_color, lwd=3)
+lines(unique_lr, mean_auc[2,]+sd_auc[2,], type='n') # upper bound
+lines(unique_lr, mean_auc[2,]-sd_auc[2,], type='n') # lower bound
+second_polygon <- rgb(17, 101, 219, alpha=255*0.2, maxColorValue=255)
+polygon(c(unique_lr, rev(unique_lr)), c(mean_auc[2,]+sd_auc[2,], rev(mean_auc[2,]-sd_auc[2,])),
+        col = second_polygon, border = NA) # plogon to fill the area
+# third line
+third_color <- rgb(219, 104, 17, alpha=255*0.8, maxColorValue=255)
+lines(x=unique_lr, y=mean_auc[3,], type="b", col=third_color, lwd=3)
+lines(unique_lr, mean_auc[3,]+sd_auc[3,], type='n') # upper bound
+lines(unique_lr, mean_auc[3,]-sd_auc[3,], type='n') # lower bound
+third_polygon <- rgb(219, 104, 17, alpha=255*0.2, maxColorValue=255)
+polygon(c(unique_lr, rev(unique_lr)), c(mean_auc[3,]+sd_auc[3,], rev(mean_auc[3,]-sd_auc[3,])),
+        col = third_polygon, border = NA) # plogon to fill the area
+# fourth line
+fourth_color <- rgb(219, 17, 192, alpha=255*0.8, maxColorValue=255)
+lines(x=unique_lr, y=mean_auc[4,], type="b", col=fourth_color, lwd=3)
+lines(unique_lr, mean_auc[4,]+sd_auc[4,], type='n') # upper bound
+lines(unique_lr, mean_auc[4,]-sd_auc[4,], type='n') # lower bound
+fourth_polygon <- rgb(219, 17, 192, alpha=255*0.2, maxColorValue=255)
+polygon(c(unique_lr, rev(unique_lr)), c(mean_auc[4,]+sd_auc[4,], rev(mean_auc[4,]-sd_auc[4,])),
+        col = fourth_polygon, border = NA) # plogon to fill the area
+
+arrows(x0=unique_lr, x1=unique_lr, y0=mean_auc[2,],
+       y1=mean_auc[2,]+sd_auc[2,], code=2, angle=90, col=second_color, lwd=2)
 arrows(x0=unique_lr, x1=unique_lr, y0=mean_auc[1,],
        y1=mean_auc[1,]+sd_auc[1,], code=2, angle=90, col=first_color, lwd=5)
 
