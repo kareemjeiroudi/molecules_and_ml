@@ -61,6 +61,9 @@ y_true = np.array(y_true)
 #### Predicting on the Test Set ####
 y_prob = best_model.predict(X_test)
 y_pred = best_model.predict_classes(X_test)
+## if you didn't load the model from the harddisk, use this
+y_prob = classifier.predict(X_test)
+y_pred = classifier.predict_classes(X_test)
 
 ### Evaluating Model's predictions ####
 from sklearn.metrics import roc_auc_score, roc_curve, confusion_matrix

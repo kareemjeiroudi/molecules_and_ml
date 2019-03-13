@@ -15,6 +15,18 @@ y_train = np.loadtxt("data/train_labels.txt", delimiter=' ', comments='# ', enco
 X_test = np.loadtxt("data/valid_samples.txt", delimiter=' ', comments='# ', encoding=None)
 y_test = np.loadtxt("data/valid_labels.txt", delimiter=' ', comments='# ', encoding=None)
 
+## Reconstrucing one of Selu's best models
+## this was the best selu scoing-model
+batch_size 100
+activation selu
+lr 0.01
+num_layers 5
+units 512
+auc 
+0.879323393627488
+optimizer SGD
+epochs 10
+
 ### Constructing the model ###
 import keras as k
 from keras.models import Sequential
@@ -24,10 +36,10 @@ from keras.metrics import binary_accuracy
 k.backend.clear_session()
 classifier = Sequential()
 ## Input layer
-classifier.add(Dense(units=1024, input_dim=len(X_train[0]), activation='relu'))
+classifier.add(Dense(units=512, input_dim=len(X_train[0]), activation='selu'))
 ## Hidden layer
 for i in range(5):
-    classifier.add(Dense(units=1024, activation='selu'))
+    classifier.add(Dense(units=512, activation='selu'))
     classifier.add(Dropout(rate=0.1))
 ## Ouptut layer
 classifier.add(Dense(units=1, activation='sigmoid'))
