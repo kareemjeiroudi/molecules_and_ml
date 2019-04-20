@@ -35,3 +35,9 @@ There have been attempts by several researchers to use Random Forest techniques 
 -------
 
 To follow along the whole procedure, please take a look on the project's report. Comments and descriptions of methods are provided within the report: [Keras Sequential Models on Chemical Property Predictions](report/Keras_Sequential_Models_on_Chemical_Property_Predictions.pdf)
+
+
+
+## Update 05. April
+
+Soon I'll be making a well-documented Jupyter Notebook from A to Z to summarize all of the work and get rid of all these separate scripts. Just bare with me for now, if you're trying to access these project files. I know the repository is cluttered up at the moment.

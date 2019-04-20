@@ -49,8 +49,8 @@ np.random.seed(seed)
 
 ## define the grid search parameters
 batch_size = [10, 20, 40, 60, 80, 100]
-epochs = [10, 50, 100]
-learn_rate = [0.001, 0.01, 0.1, 0.2, 0.3]
+epochs = [10, 20, 30]
+learn_rate = [0.001, 0.01, 0.1, 0.2, 0.3, 0.5]
 momentum = [0.0, 0.2, 0.4, 0.6, 0.8, 0.9]
 init_mode = ['uniform', 'lecun_uniform', 'normal', 'zero', 
              'glorot_normal', 'glorot_uniform', 'he_normal', 'he_uniform']

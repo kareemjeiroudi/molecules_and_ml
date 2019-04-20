@@ -71,17 +71,17 @@ def build_model(optimizer, learning_rate, activation, dropout_rate,
 seed = 7
 np.random.seed(seed)
 
-## Define the parameters
-optimizer = [SGD, RMSprop, Adagrad, Adadelta, Adam, Adamax]
-learning_rate = [0.001, 0.01, 0.1, 0.2, 0.3]
-activation = ['relu', 'softsign', 'tanh', 'sigmoid', 'selu']
-dropout_rate = [0.0, 0.1, 0.5, 0.7]
-initilizer = ['lecun_uniform', 'normal', 'uniform', 'he_uniform']
-num_unit = [5, 10, 100, 256, 512, 2048]
-num_layers = [2, 5]
-epochs = [1, 20, 50, 100]
-batch_size = [20, 50, 100, 200, 500, 1000]
-momentum = [0.0, 0.2, 0.6,  0.9][:1]
+## Define the serach space.
+batch_size = [10, 20, 40, 80, 100]
+epochs = [10, 20, 30]
+optimizer = [SGD, RMSprop, Adagrad, Adam, Adamax]
+learning_rate = [0.001, 0.01, 0.1, 0.2, 0.3, 0.5]
+momentum = [0.0, 0.1, 0.2, 0.4, 0.7, 0.9]
+initilizer = ['uniform', 'lecun_uniform', 'he_uniform', 'normal', 'he_normal']
+activation = ['softplus', 'softsign', 'tanh', 'relu', 'selu', 'sigmoid']
+num_layers = [2, 5, 10]
+num_unit = [5, 50, 120, 256, 512, 2048]
+dropout_rate = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
 
 f = open("OUTPUT_02.txt", "w")
 
