@@ -4,9 +4,11 @@ We provide a quick-and-dirty neural network implementation to predict molecule's
 
 ### Project Aim
 
-A Sequential Neural Network operating on Morgan fingerprints of arbitrary bit size for chemical property prediction (e.g. mutgenity). Eventually, we compare our predictions against the officially classified structures by the Ames test [(See 7th reference in project report)](https://github.com/kareemjeiroudi/molecules_and_ml/blob/main/doc/project_report.pdf). We expect to see a match in the model's prediction and the Ames classification, when the model is best optimzied. 
+A Sequential Neural Network operating on Morgan fingerprints of arbitrary bit size for chemical property prediction (e.g. mutgenity). Eventually, we compare our predictions against the officially classified structures by the Ames test [(See 7th reference in project report)](https://github.com/kareemjeiroudi/molecules_and_ml/blob/main/doc/project_report.pdf). We expect to see a match in the model's prediction and the Ames classification, when the model is best optimzied.
 
-### Quick Notes
+![Activation functions and Learning rate comparison](analysis_best_model/MeanAUC_vs_LearningRate.jpeg)
+
+###Quick Notes
 
 This repository contains the data that's used for my semester project. Each python script in this repo accomplishes on step in the project workflow. Any insignificant data that's dropped here, will be moved to the directory draft. There is where I keep experimental files and all irrelevant code. That includes repetative scripts with slight modifications. Additionally, this repository is periodically getting cleaned up. I'm removing a lot of clutter every now and then.
 
@@ -24,6 +26,8 @@ Main, I use Jupyter Notebook to demonstrate my work from A-Z, but at some point 
 
 #### Morgan Fingerprints (MF)
 
+![Example of Morgan Fingerprints](analysis_best_model/Morgan-Fingerprint.png)
+
 Is a handy way to emed molecular data for machine learning predictions. Results of MF is a bit-vector that has either 0 or 1 elements: 0 when a fingerprint (molecular structure of interest) is absent, and 1 when present. Since 2000 Morgan Fingerprints have become the standard of today's Molecule Isomorphism. Chemists use Morgan Fingerprints heavily in order to identify substructures in large molecules. These substructures, in turn, are of particular chemical features. In this project, we discuss molecular Mutagenicity, which is the type of molecules or sites than can induce mutating the DNA, and are, therefore, classified toxic (a.k.a Toxicophores). 
 
 #### Mutagenicity
@@ -34,9 +38,13 @@ Mutagenicity in this very case, means the molecule's ability to induce DNA mutat
 
 There have been attempts by several researchers to use Random Forest techniques as well as SVM in classifying this data of interest. Additionally, some literature compares these techinques and their classification accuracy to commercial machine learning solutions. The aim of this project is construct an Deep ANN to commit predictions on that data, and optimize the model using different strategies (e.g. Grid Search or Bayesian Optimization). Machine learning algorithms exclusively derive their knowledge from the training data. The power of binary classifiers is desired for this classification problem, but is higly sophisticated at the same time. It can only be triggered by building and evaluating different models. In that regard, we dicuss the process of Hyperparamter Tuning in more details in a sepearate section.
 
--------
+### Analysis of Best-Scoring Model
 
-### Getting Started
+![Best 15 hyperparameters sets](analysis_best_model/best-15-hyperparameters-sets.png)
+
+
+
+## Getting Started
 
 To follow along the whole procedure, please take a look on the [project's report](https://github.com/kareemjeiroudi/molecules_and_ml/blob/main/doc/project_report.pdf). Comments and descriptions of methods are provided within the report: [Keras Sequential Models on Chemical Property Predictions](report/Keras_Sequential_Models_on_Chemical_Property_Predictions.pdf)
 
