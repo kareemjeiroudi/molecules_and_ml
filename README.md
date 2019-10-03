@@ -6,9 +6,9 @@ We provide a quick-and-dirty neural network implementation to predict molecule's
 
 A Sequential Neural Network operating on Morgan fingerprints of arbitrary bit size for chemical property prediction (e.g. mutgenity). Eventually, we compare our predictions against the officially classified structures by the Ames test [(See 7th reference in project report)](https://github.com/kareemjeiroudi/molecules_and_ml/blob/main/doc/project_report.pdf). We expect to see a match in the model's prediction and the Ames classification, when the model is best optimzied.
 
-<img src="analysis_best_model/MeanAUC_vs_LearningRate.jpeg" width="450" alt="Activation functions and Learning rate comparison"/>
+<img src="analysis_best_model/MeanAUC_vs_LearningRate.jpeg" width="60%" alt="Activation functions and Learning rate comparison" display=block; margin-left=auto; margin-right=auto;/>
 
-###Quick Notes
+### Quick Notes
 
 This repository contains the data that's used for my semester project. Each python script in this repo accomplishes on step in the project workflow. Any insignificant data that's dropped here, will be moved to the directory draft. There is where I keep experimental files and all irrelevant code. That includes repetative scripts with slight modifications. Additionally, this repository is periodically getting cleaned up. I'm removing a lot of clutter every now and then.
 
