@@ -6,7 +6,7 @@ We provide a quick-and-dirty neural network implementation to predict molecule's
 
 A Sequential Neural Network operating on Morgan fingerprints of arbitrary bit size for chemical property prediction (e.g. mutgenity). Eventually, we compare our predictions against the officially classified structures by the Ames test [(See 7th reference in project report)](https://github.com/kareemjeiroudi/molecules_and_ml/blob/main/doc/project_report.pdf). We expect to see a match in the model's prediction and the Ames classification, when the model is best optimzied.
 
-<img src="analysis_best_model/MeanAUC_vs_LearningRate.jpeg" width="60%" alt="Activation functions and Learning rate comparison" display=block; margin-left=auto; margin-right=auto;/>
+<img src="analysis_best_model/old (Grid Search optimization)/MeanAUC_vs_LearningRate.jpeg" width="60%" alt="Activation functions and Learning rate comparison" display=block; margin-left=auto; margin-right=auto;/>
 
 ### Quick Notes
 
@@ -26,7 +26,7 @@ Main, I use Jupyter Notebook to demonstrate my work from A-Z, but at some point 
 
 #### Morgan Fingerprints (MF)
 
-![Example of Morgan Fingerprints](analysis_best_model/Morgan-Fingerprint.png)
+![Example of Morgan Fingerprints](analysis_best_model/old (Grid Search optimization)/Morgan-Fingerprint.png)
 
 Is a handy way to emed molecular data for machine learning predictions. Results of MF is a bit-vector that has either 0 or 1 elements: 0 when a fingerprint (molecular structure of interest) is absent, and 1 when present. Since 2000 Morgan Fingerprints have become the standard of today's Molecule Isomorphism. Chemists use Morgan Fingerprints heavily in order to identify substructures in large molecules. These substructures, in turn, are of particular chemical features. In this project, we discuss molecular Mutagenicity, which is the type of molecules or sites than can induce mutating the DNA, and are, therefore, classified toxic (a.k.a Toxicophores). 
 
@@ -40,7 +40,7 @@ There have been attempts by several researchers to use Random Forest techniques 
 
 ### Analysis of Best-Scoring Model
 
-![Best 15 hyperparameters sets](analysis_best_model/best-15-hyperparameters-sets.png)
+![Best 15 hyperparameters sets](analysis_best_model/old (Grid Search optimization)/best-15-hyperparameters-sets.png)
 
 
 
