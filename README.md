@@ -1,12 +1,12 @@
 # Keras Sequential Models on Chemical Property Predictions
 
-We provide a quick-and-dirty neural network implementation to predict molecule's toxicity. This work follows the steps of a benchmark test that evaluates different machine learning models [(See 6th refrence in the project report)](https://github.com/kareemjeiroudi/molecules_and_ml/blob/main/doc/project_report.pdf). We take the appraoch of deep learning, optimize the model (hyperparameters set) using a grid search, and lastly make several statements about the best set of hyperparameters.
+We provide a quick-and-dirty neural network implementation to predict molecule's toxicity. This work follows the steps of a benchmark test that evaluates different machine learning models [(See 6th refrence in the project report)](https://github.com/kareemjeiroudi/molecules_and_ml/blob/master/doc/old-(Grid-Search-optimization)/project_report.pdf). We take the appraoch of deep learning, optimize the model (hyperparameters set) using a grid search, and lastly make several statements about the best set of hyperparameters.
 
 ### Project Aim
 
-A Sequential Neural Network operating on Morgan fingerprints of arbitrary bit size for chemical property prediction (e.g. mutgenity). Eventually, we compare our predictions against the officially classified structures by the Ames test [(See 7th reference in project report)](https://github.com/kareemjeiroudi/molecules_and_ml/blob/main/doc/project_report.pdf). We expect to see a match in the model's prediction and the Ames classification, when the model is best optimzied.
+A Sequential Neural Network operating on Morgan fingerprints of arbitrary bit size for chemical property prediction (e.g. mutgenity). Eventually, we compare our predictions against the officially classified structures by the Ames test [(See 7th reference in project report)](https://github.com/kareemjeiroudi/molecules_and_ml/blob/master/doc/old-(Grid-Search-optimization)/project_report.pdf). We expect to see a match in the model's prediction and the Ames classification, when the model is best optimzied.
 
-<img src="analysis_best_model/old (Grid Search optimization)/MeanAUC_vs_LearningRate.jpeg" width="60%" alt="Activation functions and Learning rate comparison" display=block; margin-left=auto; margin-right=auto;/>
+<img src="analysis_best_model/old-(Grid-Search-optimization)/MeanAUC_vs_LearningRate.jpeg" width="60%" alt="Activation functions and Learning rate comparison" display=block; margin-left=auto; margin-right=auto;/>
 
 ### Quick Notes
 
@@ -26,7 +26,7 @@ Main, I use Jupyter Notebook to demonstrate my work from A-Z, but at some point 
 
 #### Morgan Fingerprints (MF)
 
-![](/Users/kareem/JupyterNotebooks/molecules_and_ml/analysis_best_model/old-(Grid-Search-optimization)/Morgan-Fingerprint.png)
+![moragn fingerprint example](analysis_best_model/old-(Grid-Search-optimization)/Morgan-Fingerprint.png)
 
 Is a handy way to emed molecular data for machine learning predictions. Results of MF is a bit-vector that has either 0 or 1 elements: 0 when a fingerprint (molecular structure of interest) is absent, and 1 when present. Since 2000 Morgan Fingerprints have become the standard of today's Molecule Isomorphism. Chemists use Morgan Fingerprints heavily in order to identify substructures in large molecules. These substructures, in turn, are of particular chemical features. In this project, we discuss molecular Mutagenicity, which is the type of molecules or sites than can induce mutating the DNA, and are, therefore, classified toxic (a.k.a Toxicophores). 
 
@@ -46,7 +46,7 @@ There have been attempts by several researchers to use Random Forest techniques 
 
 ## Getting Started
 
-To follow along the whole procedure, please take a look on the [project's report](https://github.com/kareemjeiroudi/molecules_and_ml/blob/main/doc/project_report.pdf). Comments and descriptions of methods are provided within the report: [Keras Sequential Models on Chemical Property Predictions](report/Keras_Sequential_Models_on_Chemical_Property_Predictions.pdf)
+To follow along the whole procedure, please take a look on the [project's report](https://github.com/kareemjeiroudi/molecules_and_ml/blob/master/doc/old-(Grid-Search-optimization)/project_report.pdf). Comments and descriptions of methods are provided within the report: [Keras Sequential Models on Chemical Property Predictions](doc/old-(Grid-Search-optimization)/project_report.pdf)
 
 
 
