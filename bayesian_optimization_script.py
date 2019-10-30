@@ -37,6 +37,20 @@ search_space = {'units': (5, 2048), # discrete
 with open('dumped_objects/bits.pckl', 'rb') as f:
     X_train, X_valid, y_train, y_valid = pickle.load(f)
 
+_start_time = time.time()
+_i = 0
+def tic():
+    global _start_time 
+    global _i
+    _start_time = time.time()
+    _i = 1
+
+def tac():
+    t_sec = round(time.time() - _start_time)
+    (t_min, t_sec) = divmod(t_sec,60)
+    (t_hour,t_min) = divmod(t_min,60) 
+    print('Iter {} Time passed: {}hour:{}min:{}sec'.format(_i, t_hour,t_min,t_sec))
+    _i+=1
 
 input_dim = X_valid.shape[1]
 def train_evaluate_and_auc(units, activation, optimizer, lr, n_layers, epochs, batch_size, momentum, init, dropout_rate):
@@ -68,20 +82,7 @@ def train_evaluate_and_auc(units, activation, optimizer, lr, n_layers, epochs, b
     return roc_auc_score(y_valid, classifier.predict(X_valid))
 
 
-_start_time = time.time()
-_i = 0
-def tic():
-    global _start_time 
-    global _i
-    _start_time = time.time()
-    _i = 1
 
-def tac():
-    t_sec = round(time.time() - _start_time)
-    (t_min, t_sec) = divmod(t_sec,60)
-    (t_hour,t_min) = divmod(t_min,60) 
-    print('Iter {} Time passed: {}hour:{}min:{}sec'.format(_i, t_hour,t_min,t_sec))
-    _i+=1
 
 
 tic()
