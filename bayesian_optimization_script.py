@@ -16,20 +16,20 @@ import pickle
 from bayes_opt import BayesianOptimization
 
 
-param_reference = {'init': ['lecun_uniform', 'he_uniform', 'uniform', 'glorot_uniform', 'he_normal', 'normal', 'glorot_normal'],
+param_reference = {'init': ['lecun_uniform', 'uniform', 'normal'],
              'activation': ['relu', 'sigmoid', 'selu'],
               'optimizer': ['SGD', 'Adam', 'RMSprop']
                   }
 
-search_space = {'units': (5, 2048), # discrete
+search_space = {'units': (5, 1048), # discrete
                 'activation': (0, 2), # categorical
-                'optimizer': (0, 2), # categorical
+                'optimizer': (0, 1), # categorical
                 'lr': (.00001, .2), # continuous
                 'n_layers': (2, 15), # discrete
                 'epochs': (5, 30), # discrete
                 'batch_size': (1, 200), # discrete
                 'momentum': (0.001, 0.5), # continuous
-                'init': (0, 6), # categorical
+                'init': (0, 2), # categorical
                 'dropout_rate': (0.0001, 0.9) # continuous
                }
 
@@ -38,19 +38,15 @@ with open('dumped_objects/bits.pckl', 'rb') as f:
     X_train, X_valid, y_train, y_valid = pickle.load(f)
 
 _start_time = time.time()
-_i = 0
 def tic():
     global _start_time 
-    global _i
     _start_time = time.time()
-    _i = 1
 
 def tac():
     t_sec = round(time.time() - _start_time)
     (t_min, t_sec) = divmod(t_sec,60)
     (t_hour,t_min) = divmod(t_min,60) 
-    print('Iter {} Time passed: {}hour:{}min:{}sec'.format(_i, t_hour,t_min,t_sec))
-    _i+=1
+    print('Time passed: {}hour:{}min:{}sec'.format(t_hour,t_min,t_sec))
 
 input_dim = X_valid.shape[1]
 def train_evaluate_and_auc(units, activation, optimizer, lr, n_layers, epochs, batch_size, momentum, init, dropout_rate):
@@ -87,7 +83,7 @@ def train_evaluate_and_auc(units, activation, optimizer, lr, n_layers, epochs, b
 
 tic()
 optimization = BayesianOptimization(f=train_evaluate_and_auc, pbounds=search_space, random_state=0, verbose=0)
-optimization.maximize(init_points=20, n_iter=40)
+optimization.maximize(init_points=10, n_iter=20)
 print("Bayesian Optimization took")
 tac()
 print(optimization.max)
