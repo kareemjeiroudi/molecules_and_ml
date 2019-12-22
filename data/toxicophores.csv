@@ -1,0 +1,36 @@
+,Toxicophore name,SMARTS string
+0,Specific aromatic nitro,O=N(~O)a
+1,Specific aromatic amine,a[NH2]
+2,aromatic nitroso,a[N;X2]=O
+3,alkyl nitrite,CO[N;X2]=O
+4,nitrosamine,N[N;X2]=O
+5,epoxide,"O1[c,C]-[c,C]1"
+6,aziridine,C1NC1
+7,azide,N=[N+1]=[N-]
+8,diazo,C=[N+]=[N-]
+9,triazene,N=N-n
+10,aromatic azo,c[N;X2]!@;=[N;X2]c
+11,aromatic azoxy,cN!@;=[N;X3](O)c
+12,unsubstituted heteroatom-bonded heteroatom,"[OH,NH2][N,O]"
+13,hydroperoxide,[OH]O
+14,oxime,[OH][N;X2]=C
+15,"1,2-disubstituted peroxide","[c,C]OO[c,C]"
+16,"1,2-disubstituted aliphatic hydrazine",C[NH][NH]C
+17,aromatic hydroxylamine,[OH]Na
+18,aliphatic hydroxylamine,[OH]N
+19,aromatic hydrazine,[NH2]Na
+20,aliphatic hydrazine,[NH2]N
+21,diazohydroxyl,[OH][N;X2]=[N;X2]
+22,aliphatic halide,"[Cl,Br,I]C"
+23,carboxylic acide halide,"[Cl,Br,I]C=O"
+24,nitrogen or sulphur mustarg,"[N,S]!@[C;X4]!@[CH2][Cl,Br,I]"
+25,aliphatic monohalide,"[Cl,Br,I][C;X4]"
+26,α-cholorthioalkane,SC[Cl]
+27,β-halo ethoxy group,"[Cl,Br,I]!@[C;X4]!@[C;X4]O"
+28,chloroalkene,[Cl]C([X1])=C[X1]
+29,1-chloroethyl,"[Cl,Br,I][CH][CH3]"
+30,polyhaloalkene,"[Cl,Br,I]C(([F,Cl,Br,I])[X1])C=C"
+31,polyhalocarbonyl,"[Cl,Br,I]C(([F,Cl,Br,I])[X1])C(=O)[c,C]"
+32,bay-region in Polycyclic Aromatic Hydrocarbons,[cH]1[cH]ccc2c1c3c(cc2)cc[cH][cH]3
+33,K-region in Polycyclic Aromatic Hydrocarbons,[cH]1cccc2c1[cH][cH]c3c2ccc[cH]3
+34,polycyclic aromatic system,

@@ -1,0 +1,11 @@
+,Toxicophore name,SMARTS string
+0,sulphonate-bonded carbon (alkyl alkane sulphonate or dialkyl sulphate),"[$([C,c]OS((=O)=O)O!@[c,C]),$([c,C]S((=O)=O)O!@[c,C])]"
+1,aliphatic N-nitro,O=N(~O)N
+2,"α,β unsaturated aldehyde (including α-carbonyl aldehyde)","[$(O=[CH]C=C),$(O=[CH]C=O)]"
+3,diazonium,[N;v4]#N
+4,β-propiolactone,O=C1CCO1
+5,"α,β unsaturated alkoxy group",[CH]=[CH]O
+6,1-aryl-2-monoalkyl hydrazine,[NH;!R][NH;!R]a
+7,aromatic methylamine,[CH3][NH]a
+8,ester derivative of aromatic hydroaxylamine (including original specific toxicophore),"aN([$([OH]),$(O*=O)])[$([#1]),$(C(=O)[CH3]),$([CH3]),$([OH]),$(O*=O)]"
+9,polycyclic planar system,
