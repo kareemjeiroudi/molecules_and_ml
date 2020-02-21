@@ -1,0 +1,44 @@
+,Toxicophore Name,Found,Attributed,Pos. attributed,Neg. attributed,TP,FP,FN,TN
+0,Specific aromatic nitro,403,403,377,26,307,51,10,9
+1,Specific aromatic amine,269,269,210,59,140,62,4,4
+2,aromatic nitroso,18,18,17,1,14,3,0,0
+3,alkyl nitrite,2,2,2,0,2,0,0,0
+4,nitrosamine,138,138,112,26,100,12,0,0
+5,epoxide,215,215,160,55,132,24,0,4
+6,aziridine,29,29,27,2,25,2,0,0
+7,azide,51,51,40,11,39,1,0,0
+8,diazo,1,1,1,0,1,0,0,0
+9,triazene,0,0,0,0,0,0,0,0
+10,aromatic azo,70,0,0,0,0,0,0,0
+11,aromatic azoxy,8,0,0,0,0,0,0,0
+12,unsubstituted heteroatom-bonded heteroatom,113,113,83,30,58,19,4,2
+13,hydroperoxide,10,10,5,5,3,1,1,0
+14,oxime,27,27,15,12,9,6,0,0
+15,"1,2-disubstituted peroxide",21,21,12,9,5,4,1,2
+16,"1,2-disubstituted aliphatic hydrazine",3,3,2,1,2,0,0,0
+17,aromatic hydroxylamine,44,44,39,5,27,8,3,1
+18,aliphatic hydroxylamine,81,81,61,20,41,15,3,2
+19,aromatic hydrazine,12,12,10,2,9,1,0,0
+20,aliphatic hydrazine,21,21,16,5,13,3,0,0
+21,diazohydroxyl,1,0,0,0,0,0,0,0
+22,aliphatic halide,332,332,227,105,155,52,8,12
+23,carboxylic acide halide,3,3,3,0,1,2,0,0
+24,nitrogen or sulphur mustarg,43,0,0,0,0,0,0,0
+25,aliphatic monohalide,271,270,185,85,126,45,5,9
+26,α-cholorthioalkane,19,19,16,3,16,0,0,0
+27,β-halo ethoxy group,40,0,0,0,0,0,0,0
+28,chloroalkene,11,11,10,1,8,1,1,0
+29,1-chloroethyl,13,12,9,3,5,4,0,0
+30,polyhaloalkene,0,0,0,0,0,0,0,0
+31,polyhalocarbonyl,0,0,0,0,0,0,0,0
+32,bay-region in Polycyclic Aromatic Hydrocarbons,50,0,0,0,0,0,0,0
+33,K-region in Polycyclic Aromatic Hydrocarbons,60,0,0,0,0,0,0,0
+35,sulphonate-bonded carbon (alkyl alkane sulphonate or dialkyl sulphate),0,0,0,0,0,0,0,0
+36,aliphatic N-nitro,2,2,2,0,2,0,0,0
+37,"α,β unsaturated aldehyde (including α-carbonyl aldehyde)",54,54,40,14,26,4,3,7
+38,diazonium,4,4,4,0,4,0,0,0
+39,β-propiolactone,2,2,1,1,1,0,0,0
+40,"α,β unsaturated alkoxy group",28,28,27,1,26,1,0,0
+41,1-aryl-2-monoalkyl hydrazine,5,0,0,0,0,0,0,0
+42,aromatic methylamine,12,12,12,0,6,6,0,0
+43,ester derivative of aromatic hydroaxylamine (including original specific toxicophore),12,12,10,2,5,4,0,1

@@ -1,0 +1,45 @@
+,Toxicophore Name,Found,Attributed,Neg. attributed,Pos. attributed,TP,FP,FN,TN,Rediscovery Rate
+0,Specific aromatic nitro,403,403,30,373,306,50,9,8,0.820375335
+1,Specific aromatic amine,269,269,53,216,140,63,7,6,0.648148148
+2,aromatic nitroso,18,18,1,17,14,3,0,0,0.823529412
+3,alkyl nitrite,2,2,0,2,2,0,0,0,1
+4,nitrosamine,138,138,32,106,94,12,0,0,0.886792453
+5,epoxide,215,215,53,162,135,22,1,4,0.833333333
+6,aziridine,29,29,1,28,25,2,1,0,0.892857143
+7,azide,51,51,11,40,39,1,0,0,0.975
+8,diazo,1,1,0,1,1,0,0,0,1
+9,triazene,0,0,0,0,0,0,0,0,0
+10,aromatic azo,70,0,0,0,0,0,0,0,0
+11,aromatic azoxy,8,0,0,0,0,0,0,0,0
+12,unsubstituted heteroatom-bonded heteroatom,113,113,29,84,60,19,3,2,0.714285714
+13,hydroperoxide,10,10,3,7,5,1,1,0,0.714285714
+14,oxime,27,27,13,14,9,5,0,0,0.642857143
+15,"1,2-disubstituted peroxide",21,21,11,10,4,4,1,1,0.4
+16,"1,2-disubstituted aliphatic hydrazine",3,3,1,2,2,0,0,0,1
+17,aromatic hydroxylamine,44,44,5,39,27,9,2,1,0.692307692
+18,aliphatic hydroxylamine,81,81,21,60,41,15,2,2,0.683333333
+19,aromatic hydrazine,12,12,2,10,9,1,0,0,0.9
+20,aliphatic hydrazine,21,21,5,16,13,3,0,0,0.8125
+21,diazohydroxyl,1,0,0,0,0,0,0,0,0
+22,aliphatic halide,332,332,115,217,151,50,7,9,0.695852535
+23,carboxylic acide halide,3,3,0,3,1,2,0,0,0.333333333
+24,nitrogen or sulphur mustarg,43,0,0,0,0,0,0,0,0
+25,aliphatic monohalide,271,270,92,178,123,43,4,8,0.691011236
+26,_-cholorthioalkane,19,19,4,15,15,0,0,0,1
+27,_-halo ethoxy group,40,0,0,0,0,0,0,0,0
+28,chloroalkene,11,11,2,9,8,1,0,0,0.888888889
+29,1-chloroethyl,13,12,4,8,5,3,0,0,0.625
+30,polyhaloalkene,0,0,0,0,0,0,0,0,0
+31,polyhalocarbonyl,0,0,0,0,0,0,0,0,0
+32,bay-region in Polycyclic Aromatic Hydrocarbons,50,0,0,0,0,0,0,0,0
+33,K-region in Polycyclic Aromatic Hydrocarbons,60,0,0,0,0,0,0,0,0
+35,sulphonate-bonded carbon (alkyl alkane sulphonate or dialkyl sulphate),0,0,0,0,0,0,0,0,0
+36,aliphatic N-nitro,2,2,0,2,2,0,0,0,1
+37,"_,_ unsaturated aldehyde (including α-carbonyl aldehyde)",54,54,19,35,26,4,2,3,0.742857143
+38,diazonium,4,4,0,4,4,0,0,0,1
+39,_-propiolactone,2,2,1,1,1,0,0,0,1
+40,"_,_ unsaturated alkoxy group",28,28,1,27,26,1,0,0,0.962962963
+41,1-aryl-2-monoalkyl hydrazine,5,0,0,0,0,0,0,0,0
+42,aromatic methylamine,12,12,0,12,6,6,0,0,0.5
+43,ester derivative of aromatic hydroaxylamine (including original specific toxicophore),12,12,1,11,5,5,0,1,0
+,,,,,,,,,,0.555337477

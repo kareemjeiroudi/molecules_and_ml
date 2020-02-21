@@ -1,0 +1,44 @@
+,Toxicophore Name,Found,Attributed,Pos. attributed,Neg. attributed,TP,FP,FN,TN
+0,Specific aromatic nitro,403,403,363,40,297,45,9,12
+1,Specific aromatic amine,269,269,176,93,116,48,2,10
+2,aromatic nitroso,18,18,16,2,13,3,0,0
+3,alkyl nitrite,2,2,2,0,2,0,0,0
+4,nitrosamine,138,138,110,28,96,13,1,0
+5,epoxide,215,215,133,82,107,20,2,4
+6,aziridine,29,29,22,7,20,2,0,0
+7,azide,51,51,37,14,35,2,0,0
+8,diazo,1,1,1,0,1,0,0,0
+9,triazene,0,0,0,0,0,0,0,0
+10,aromatic azo,70,0,0,0,0,0,0,0
+11,aromatic azoxy,8,0,0,0,0,0,0,0
+12,unsubstituted heteroatom-bonded heteroatom,113,113,76,37,52,17,4,3
+13,hydroperoxide,10,10,7,3,4,1,2,0
+14,oxime,27,27,11,16,7,3,0,1
+15,"1,2-disubstituted peroxide",21,21,9,12,5,4,0,0
+16,"1,2-disubstituted aliphatic hydrazine",3,3,0,3,0,0,0,0
+17,aromatic hydroxylamine,44,44,38,6,26,9,2,1
+18,aliphatic hydroxylamine,81,81,56,25,38,13,2,3
+19,aromatic hydrazine,12,12,8,4,8,0,0,0
+20,aliphatic hydrazine,21,21,13,8,10,3,0,0
+21,diazohydroxyl,1,0,0,0,0,0,0,0
+22,aliphatic halide,332,332,205,127,130,47,9,19
+23,carboxylic acide halide,3,3,1,2,0,1,0,0
+24,nitrogen or sulphur mustarg,43,0,0,0,0,0,0,0
+25,aliphatic monohalide,271,270,173,97,111,41,6,15
+26,α-cholorthioalkane,19,19,8,11,8,0,0,0
+27,β-halo ethoxy group,40,0,0,0,0,0,0,0
+28,chloroalkene,11,11,8,3,7,1,0,0
+29,1-chloroethyl,13,12,8,4,4,3,1,0
+30,polyhaloalkene,0,0,0,0,0,0,0,0
+31,polyhalocarbonyl,0,0,0,0,0,0,0,0
+32,bay-region in Polycyclic Aromatic Hydrocarbons,50,0,0,0,0,0,0,0
+33,K-region in Polycyclic Aromatic Hydrocarbons,60,0,0,0,0,0,0,0
+35,sulphonate-bonded carbon (alkyl alkane sulphonate or dialkyl sulphate),0,0,0,0,0,0,0,0
+36,aliphatic N-nitro,2,2,2,0,2,0,0,0
+37,"α,β unsaturated aldehyde (including α-carbonyl aldehyde)",54,54,36,18,24,4,2,6
+38,diazonium,4,4,3,1,3,0,0,0
+39,β-propiolactone,2,2,0,2,0,0,0,0
+40,"α,β unsaturated alkoxy group",28,28,27,1,26,1,0,0
+41,1-aryl-2-monoalkyl hydrazine,5,0,0,0,0,0,0,0
+42,aromatic methylamine,12,12,12,0,6,6,0,0
+43,ester derivative of aromatic hydroaxylamine (including original specific toxicophore),12,12,11,1,5,5,0,1
